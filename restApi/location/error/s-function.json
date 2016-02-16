@@ -1,17 +1,17 @@
 {
-  "name": "read",
+  "name": "error",
   "customName": false,
   "customRole": false,
-  "handler": "location/read/handler.handler",
+  "handler": "location/error/handler.handler",
   "timeout": 6,
-  "memorySize": 1024,
+  "memorySize": 128,
   "custom": {
     "excludePatterns": [],
     "envVars": []
   },
   "endpoints": [
     {
-      "path": "location/read",
+      "path": "location/error",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
@@ -25,8 +25,8 @@
           "statusCode": "400"
         },
         "404": {
-          "selectionPattern": "NotFound",
-          "statusCode": "404"
+          "statusCode": "404",
+          "selectionPattern": "NotFound"
         },
         "default": {
           "statusCode": "200",

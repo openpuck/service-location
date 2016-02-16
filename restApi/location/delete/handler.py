@@ -19,4 +19,6 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    return {}
+    #return os.environ.keys() 
+    #return event['id']
+    return event

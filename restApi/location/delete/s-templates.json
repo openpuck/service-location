@@ -1,0 +1,13 @@
+{
+    "endpointTemplate": {
+        "integration.request.querystring.latitude" : "method.request.querystring.latitude",
+        "integration.request.querystring.longitude" : "method.request.querystring.longitude"
+      },
+     "apiRequestTemplate": {
+        "application/json": {
+            "id": "$input.params('id')",
+            "body": "$input.json('$')",
+            "allParams": "$input.params()"
+        }
+     }
+}

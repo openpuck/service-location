@@ -19,4 +19,5 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    return {}
+    #return {}
+    return lib.LocationsTable.scan()
