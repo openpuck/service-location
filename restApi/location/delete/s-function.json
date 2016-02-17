@@ -3,8 +3,8 @@
   "customName": false,
   "customRole": false,
   "handler": "location/delete/handler.handler",
-  "timeout": 6,
-  "memorySize": 1024,
+  "timeout": 3,
+  "memorySize": 128,
   "custom": {
     "excludePatterns": [],
     "envVars": []
@@ -16,7 +16,7 @@
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
-      "requestParameters": "$${endpointTemplate}",
+      "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {

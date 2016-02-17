@@ -19,10 +19,10 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    if 'id' in event:
-        response = lib.LocationsTable.get_item(Key={'id': event['id']})
+    if 'pathId' in event:
+        response = lib.LocationsTable.get_item(Key={'id': event['pathId']})
         if 'Item' in response:
-            return response['Item']
+            return lib.get_json(response['Item'])
         raise Exception("NotFound")
     else:
         raise Exception("BadRequest")

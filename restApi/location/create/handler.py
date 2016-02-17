@@ -19,4 +19,6 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    return {}
+    event['body']['id'] = lib.make_uuid()
+    lib.LocationsTable.put_item(Item=event['body'])
+    return event

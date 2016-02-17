@@ -3,8 +3,8 @@
   "customName": false,
   "customRole": false,
   "handler": "location/create/handler.handler",
-  "timeout": 6,
-  "memorySize": 1024,
+  "timeout": 3,
+  "memorySize": 128,
   "custom": {
     "excludePatterns": [],
     "envVars": []
@@ -12,7 +12,7 @@
   "endpoints": [
     {
       "path": "location/create",
-      "method": "GET",
+      "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
