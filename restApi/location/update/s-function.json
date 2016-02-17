@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "location/update",
+      "path": "location/update/{id}",
       "method": "PUT",
       "type": "AWS",
       "authorizationType": "none",

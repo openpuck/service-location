@@ -21,17 +21,17 @@ def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
     response = lib.LocationsTable.update_item(
         Key={
-            'id': event['id']
+            'id': event['pathId']
         },
         #UpdateExpression="set cn = :cn, street = :st, city = :ct, state = :sa, country = :co, postal = :z",
         UpdateExpression="set cn = :cn, street = :st, city = :ct, country = :co, postal = :z",
         ExpressionAttributeValues={
-            ':cn': event['cn'],
-            ':st': event['street'],
-            ':ct': event['city'],
-            #':sa': event['state'],
-            ':co': event['country'],
-            ':z' : event['postal']
+            ':cn': event['body']['cn'],
+            ':st': event['body']['street'],
+            ':ct': event['body']['city'],
+            #':sa': event['body']['state'],
+            ':co': event['body']['country'],
+            ':z' : event['body']['postal']
         },
         ReturnValues="ALL_NEW"
     )
