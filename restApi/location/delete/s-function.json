@@ -16,7 +16,7 @@
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
-      "requestParameters": {},
+      "requestParameters": "$${endpointTemplate}",
       "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {

@@ -17,12 +17,11 @@
       "authorizationType": "none",
       "apiKeyRequired": false,
       "requestParameters": {},
-      "requestTemplates": {
-        "application/json": ""
-      },
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
-          "statusCode": "400"
+          "statusCode": "400",
+          "selectionPattern": "BadRequest"
         },
         "404": {
           "selectionPattern": "NotFound",

@@ -1,1 +1,8 @@
-{}
+{
+  "body": {
+    "foo": "bar"
+  },
+  "pathId": "lolzpath",
+  "pathParams": "{id=lolzpath}",
+  "queryParams": "{latitude=lolzlat, longitude=lolzlong}"
+}
