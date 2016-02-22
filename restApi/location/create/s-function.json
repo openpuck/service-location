@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "location/create",
+      "path": "location",
       "method": "POST",
       "type": "AWS",
       "authorizationType": "none",

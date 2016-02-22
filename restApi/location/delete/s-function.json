@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "location/delete/{id}",
+      "path": "location/{id}",
       "method": "DELETE",
       "type": "AWS",
       "authorizationType": "none",

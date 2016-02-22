@@ -11,15 +11,13 @@
   },
   "endpoints": [
     {
-      "path": "location/list",
+      "path": "location",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
       "requestParameters": {},
-      "requestTemplates": {
-        "application/json": ""
-      },
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
           "statusCode": "400"

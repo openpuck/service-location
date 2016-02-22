@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "location/read/{id}",
+      "path": "location/{id}",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
