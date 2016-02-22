@@ -3,8 +3,8 @@
   "customName": false,
   "customRole": false,
   "handler": "location/list/handler.handler",
-  "timeout": 6,
-  "memorySize": 1024,
+  "timeout": 3,
+  "memorySize": 128,
   "custom": {
     "excludePatterns": [],
     "envVars": []
