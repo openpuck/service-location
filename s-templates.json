@@ -6,5 +6,8 @@
       "queryParams" : "$input.params().querystring",
       "pathId": "$input.params('id')"
     }
+  },
+  "apiGatewayResponseErrorTemplate": {
+    "application/json": ""
   }
 }

@@ -3,7 +3,7 @@ import boto3
 import json
 import decimal
 from uuid import uuid4
-from exceptions import BadRequestException
+from exceptions import *
 
 #LocationsTable = boto3.resource('dynamodb', endpoint_url='http://localhost:8000', region_name='us-east-1').Table('locations')
 LocationsTable = boto3.resource('dynamodb', region_name='us-east-1').Table('locations')
