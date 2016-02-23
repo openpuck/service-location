@@ -19,4 +19,4 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    return lib.LocationsTable.scan()['Items']
+    return lib.get_json(lib.LocationsTable.scan()['Items'])
