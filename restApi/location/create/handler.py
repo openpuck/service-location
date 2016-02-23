@@ -19,16 +19,24 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
+
+    # Auto-generate an ID
     event['body']['id'] = lib.make_uuid()
 
+    # Test for required attributes
     required_keys = ['id', 'cn', 'street', 'city', 'province', 'icao']
     for key in required_keys:
         if key not in event['body'].keys():
             raise lib.BadRequestException("Key '%s' is missing." % key)
         if len(event['body'][key]) is 0:
             raise lib.BadRequestException("Key '%s' is empty." % key)
+
+    # Normalize certain fields
     for key in ['street', 'city', 'province', 'icao']:
         event['body'][key] = event['body'][key].upper()
 
+    # Add to database
     lib.LocationsTable.put_item(Item=event['body'])
+
+    # Return
     return event['body']
