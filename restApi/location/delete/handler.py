@@ -19,6 +19,6 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
-    #return os.environ.keys() 
-    #return event['id']
+
+    # Return
     lib.LocationsTable.delete_item(Key={'id': event['pathId']})
