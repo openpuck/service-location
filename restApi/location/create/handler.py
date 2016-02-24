@@ -16,12 +16,13 @@ sys.path.append(os.path.join(here, "../../vendored"))
 # import the shared library, now anything in component/lib/__init__.py can be
 # referenced as `lib.something`
 import lib
+from uuid import uuid4
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
 
     # Auto-generate an ID
-    event['body']['id'] = lib.make_uuid()
+    event['body']['id'] = str(uuid4())
 
     # Test for required attributes
     required_keys = ['id', 'cn', 'street', 'city', 'province', 'icao']
