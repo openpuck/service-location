@@ -32,6 +32,10 @@ def handler(event, context):
         if len(event['body'][key]) is 0:
             raise lib.BadRequestException("Key '%s' is empty." % key)
 
+    # Validate
+    lib.validate_string_length(event['body']['province'], 2)
+    lib.validate_string_length(event['body']['icao'], 4)
+
     # Normalize certain fields
     for key in ['street', 'city', 'province', 'icao']:
         event['body'][key] = event['body'][key].upper()

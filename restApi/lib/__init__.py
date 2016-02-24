@@ -22,3 +22,10 @@ def get_json(response):
     """
     return json.loads(json.dumps(response, cls=DecimalEncoder))
 
+
+def validate_string_length(input_string, num_chars):
+    """
+    Validate a territory code.
+    """
+    if len(input_string) > num_chars:
+        raise BadRequestException("Value '%s' has too many characters (max: %d)." % (input_string, num_chars))
