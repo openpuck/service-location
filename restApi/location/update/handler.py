@@ -19,20 +19,37 @@ import lib
 
 def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
+
+    # Test for required attributes
+    required_keys = ['cn', 'street', 'city', 'province', 'icao']
+    for key in required_keys:
+        if key not in event['body'].keys():
+            raise lib.BadRequestException("Key '%s' is missing." % key)
+        if len(event['body'][key]) is 0:
+            raise lib.BadRequestException("Key '%s' is empty." % key)
+    if 'pathId' not in event.keys():
+        raise lib.BadRequestException("Key '%s' is missing." % key)
+
+    # Normalize certain fields
+    for key in ['street', 'city', 'province', 'icao']:
+        event['body'][key] = event['body'][key].upper()
+
+    # Update
     response = lib.LocationsTable.update_item(
         Key={
             'id': event['pathId']
         },
-        #UpdateExpression="set cn = :cn, street = :st, city = :ct, state = :sa, country = :co, postal = :z",
-        UpdateExpression="set cn = :cn, street = :st, city = :ct, country = :co, postal = :z",
+        UpdateExpression="set cn = :cn, street = :st, city = :ct, province = :pv, country = :co, postal = :z",
         ExpressionAttributeValues={
             ':cn': event['body']['cn'],
             ':st': event['body']['street'],
             ':ct': event['body']['city'],
-            #':sa': event['body']['state'],
+            ':pv': event['body']['province'],
             ':co': event['body']['country'],
             ':z' : event['body']['postal']
         },
         ReturnValues="ALL_NEW"
     )
+
+    # Return
     return lib.get_json(response['Attributes'])

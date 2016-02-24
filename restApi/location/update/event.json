@@ -1,9 +1,12 @@
 {
-    "id": "0df834eb-aba1-4b55-ba63-adbb521fd142",
-    "cn": "Walter Brown Arena",
-    "street": "285 BABCOCK ST",
-    "city": "BEANTOWN",
-    "state": "MA",
-    "country": "USA",
-    "postal": "02140"
+    "pathId": "656926fb-7d3a-49eb-af73-111b3143a621",
+    "body": {
+        "city": "FooZloz",
+        "cn": "Walter Brown",
+        "country": "Canada",
+        "street": "123 Main St",
+        "province": "Ontario",
+        "icao": "MA39",
+        "postal": "02140"
+    }
 }
