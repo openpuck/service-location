@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "pathParams": {},
+  "queryParams": {
+    "location_id": "foobar",
+    "altname": "HARTFORD CT"
+  },
+  "altname": "HARTFORD CT",
+  "location_id": "foobar"
+}

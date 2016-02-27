@@ -6,6 +6,7 @@ from exceptions import *
 
 #LocationsTable = boto3.resource('dynamodb', endpoint_url='http://localhost:8000', region_name='us-east-1').Table('locations')
 LocationsTable = boto3.resource('dynamodb', region_name='us-east-1').Table('locations')
+LocationAltnamesTable = boto3.resource('dynamodb', endpoint_url='http://localhost:8000', region_name='us-east-1').Table('location_altnames')
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
