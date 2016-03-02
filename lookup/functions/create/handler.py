@@ -21,7 +21,7 @@ def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
 
     # Test for required attributes
-    required_keys = ['altname']
+    required_keys = ['altname', 'location_id']
     lib.validation.check_keys(required_keys, event)
 
     # Make sure the relation ids exists

@@ -1,3 +1,5 @@
+from lib.exceptions import *
+
 def string_length(input_string, num_chars):
     """
     Validate a territory code.
