@@ -1,10 +1,7 @@
 {
   "body": {},
   "pathParams": {},
-  "queryParams": {
-    "location_id": "foobar",
-    "altname": "HARTFORD CT"
-  },
+  "queryParams": {},
   "altname": "HARTFORD CT",
-  "location_id": "foobar"
+  "location_id": "f2ce5e0a-60c8-4d55-b577-9aba1d34a1ef"
 }

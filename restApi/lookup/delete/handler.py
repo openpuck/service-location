@@ -21,8 +21,7 @@ def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
 
     # Test for required attributes
-    for key in (event['altname'], event['location_id']):
-        if len(key) is 0:
-            raise lib.BadRequestException("Key '%s' is empty." % key)
+    required_keys = ['altname', 'location_id']
+    lib.test_for_keys(required_keys, event, False)
 
     return lib.LocationAltnamesTable.delete_item(Key={'location_id': event['location_id'], 'altname': event['altname']})
