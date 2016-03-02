@@ -1,8 +1,8 @@
 {
-  "name": "search",
+  "name": "list",
   "customName": false,
   "customRole": false,
-  "handler": "lookup/search/handler.handler",
+  "handler": "functions/list/handler.handler",
   "timeout": 3,
   "memorySize": 128,
   "custom": {
@@ -11,16 +11,13 @@
   },
   "endpoints": [
     {
-      "path": "lookup/search",
+      "path": "location",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
-      "requestParameters": {
-        "integration.request.querystring.location_id": "method.request.querystring.location_id",
-        "integration.request.querystring.altname": "method.request.querystring.altname"
-      },
-      "requestTemplates": "$${apigLookupRequestTemplate}",
+      "requestParameters": {},
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
           "statusCode": "400"

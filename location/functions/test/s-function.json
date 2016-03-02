@@ -1,26 +1,25 @@
 {
-  "name": "delete",
+  "name": "test",
   "customName": false,
   "customRole": false,
-  "handler": "lookup/delete/handler.handler",
-  "timeout": 3,
-  "memorySize": 128,
+  "handler": "functions/test/handler.handler",
+  "timeout": 6,
+  "memorySize": 1024,
   "custom": {
     "excludePatterns": [],
     "envVars": []
   },
   "endpoints": [
     {
-      "path": "lookup",
-      "method": "DELETE",
+      "path": "test",
+      "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
-      "requestParameters": {
-        "integration.request.querystring.location_id": "method.request.querystring.location_id",
-        "integration.request.querystring.altname": "method.request.querystring.altname"
+      "requestParameters": {},
+      "requestTemplates": {
+        "application/json": ""
       },
-      "requestTemplates": "$${apigLookupRequestTemplate}",
       "responses": {
         "400": {
           "statusCode": "400"

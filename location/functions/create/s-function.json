@@ -1,8 +1,8 @@
 {
-  "name": "update",
+  "name": "create",
   "customName": false,
   "customRole": false,
-  "handler": "location/update/handler.handler",
+  "handler": "functions/create/handler.handler",
   "timeout": 3,
   "memorySize": 128,
   "custom": {
@@ -11,8 +11,8 @@
   },
   "endpoints": [
     {
-      "path": "location/{id}",
-      "method": "PUT",
+      "path": "location",
+      "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,

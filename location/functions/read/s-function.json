@@ -1,8 +1,8 @@
 {
-  "name": "list",
+  "name": "read",
   "customName": false,
   "customRole": false,
-  "handler": "lookup/list/handler.handler",
+  "handler": "functions/read/handler.handler",
   "timeout": 3,
   "memorySize": 128,
   "custom": {
@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "lookup",
+      "path": "location/{id}",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
@@ -20,7 +20,17 @@
       "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
-          "statusCode": "400"
+          "statusCode": "400",
+          "selectionPattern": "BadRequestException.*",
+          "responseTemplates": "$${apiGatewayResponseErrorTemplate}"
+        },
+        "404": {
+          "selectionPattern": "NotFoundException.*",
+          "statusCode": "404",
+          "responseTemplates": "$${apiGatewayResponseErrorTemplate}",
+          "responseParameters": {
+            "method.response.header.errorMessage": "integration.response.body.errorMessage"
+          }
         },
         "default": {
           "statusCode": "200",

@@ -1,8 +1,8 @@
 {
-  "name": "read",
+  "name": "delete",
   "customName": false,
   "customRole": false,
-  "handler": "location/read/handler.handler",
+  "handler": "functions/delete/handler.handler",
   "timeout": 3,
   "memorySize": 128,
   "custom": {
@@ -12,7 +12,7 @@
   "endpoints": [
     {
       "path": "location/{id}",
-      "method": "GET",
+      "method": "DELETE",
       "type": "AWS",
       "authorizationType": "none",
       "apiKeyRequired": false,
@@ -20,17 +20,7 @@
       "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
-          "statusCode": "400",
-          "selectionPattern": "BadRequestException.*",
-          "responseTemplates": "$${apiGatewayResponseErrorTemplate}"
-        },
-        "404": {
-          "selectionPattern": "NotFoundException.*",
-          "statusCode": "404",
-          "responseTemplates": "$${apiGatewayResponseErrorTemplate}",
-          "responseParameters": {
-            "method.response.header.errorMessage": "integration.response.body.errorMessage"
-          }
+          "statusCode": "400"
         },
         "default": {
           "statusCode": "200",

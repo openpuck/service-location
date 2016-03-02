@@ -2,7 +2,7 @@
   "name": "list",
   "customName": false,
   "customRole": false,
-  "handler": "location/list/handler.handler",
+  "handler": "functions/list/handler.handler",
   "timeout": 3,
   "memorySize": 128,
   "custom": {
@@ -11,7 +11,7 @@
   },
   "endpoints": [
     {
-      "path": "location",
+      "path": "lookup",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
