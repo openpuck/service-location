@@ -33,16 +33,20 @@ def handler(event, context):
             lib.validation.check_keys(['altname'], event, False)
             # Altname
             result = lib.LocationAltnamesTable.query(
-                         IndexName='AltnameIndex',
+                         IndexName='AltnameAffiliationIndex',
                          KeyConditionExpression=Key('altname').eq(event['altname'])
                             & Key('affiliation').eq(event['affiliation'])
                      )
+            if result['Count'] is 0:
+                raise lib.NotFoundException("altname+affilation '%s'+'%s' not found." % (event['altname'], event['affiliation']))
         except lib.BadRequestException:
             # No Altname
             result = lib.LocationAltnamesTable.query(
                          IndexName='AffiliationIndex',
                          KeyConditionExpression=Key('affiliation').eq(event['affiliation'])
                      )
+            if result['Count'] is 0:
+                raise lib.NotFoundException("affilation '%s' not found." % event['affiliation'])
     except lib.BadRequestException:
         # No affiliation
         try:
@@ -52,11 +56,11 @@ def handler(event, context):
                          IndexName='AltnameIndex',
                          KeyConditionExpression=Key('altname').eq(event['altname'])
                      )
+            if result['Count'] is 0:
+                raise lib.NotFoundException("altname '%s' not found." % event['altname'])
         except lib.BadRequestException:
             # No Altname
             raise lib.BadRequestException("Keys '%s'|'%s' missing." % ('altname', 'affiliation'))
 
-    if result['Count'] is 0:
-        raise lib.NotFoundException("altname '%s' not found." % event['altname'])
 
     return lib.get_json(result['Items'])
