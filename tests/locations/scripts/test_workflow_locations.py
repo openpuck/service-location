@@ -54,6 +54,11 @@ def delete(id_):
     return json.loads(r_loc_del.text)
 
 # List
+def list_():
+    print "LIST"
+    r_loc_list = requests.get(LOCATION_URL)
+    myerror(r_loc_list)
+    print len(json.loads(r_loc_list.text))
 
 
 # Do!
@@ -65,3 +70,4 @@ u_json = update(r_json)
 print u_json
 d_json = delete(u_json['id'])
 print d_json
+list_()
