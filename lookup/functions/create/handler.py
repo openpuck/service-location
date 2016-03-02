@@ -31,7 +31,7 @@ def handler(event, context):
     except lib.exceptions.ClientError as ce:
         raise lib.exceptions.InternalServerException(ce.message)
     if 'Item' not in response.keys():
-        raise lib.NotFoundException("Location '%s' not found." % location_id)
+        raise lib.exceptions.NotFoundException("Location '%s' not found." % location_id)
     # @TODO: Teams when they exist
 
     # Normalize certain fields

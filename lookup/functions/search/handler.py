@@ -40,16 +40,16 @@ def handler(event, context):
                                 & Key('affiliation').eq(event['affiliation'])
                          )
                 if result['Count'] is 0:
-                    raise lib.NotFoundException("altname+affilation '%s'+'%s' not found." % (event['altname'], event['affiliation']))
-            except lib.BadRequestException:
+                    raise lib.exceptions.NotFoundException("altname+affilation '%s'+'%s' not found." % (event['altname'], event['affiliation']))
+            except lib.exceptions.BadRequestException:
                 # No Altname
                 result = lib.LocationAltnamesTable.query(
                              IndexName='AffiliationIndex',
                              KeyConditionExpression=Key('affiliation').eq(event['affiliation'])
                          )
                 if result['Count'] is 0:
-                    raise lib.NotFoundException("affilation '%s' not found." % event['affiliation'])
-        except lib.BadRequestException:
+                    raise lib.exceptions.NotFoundException("affilation '%s' not found." % event['affiliation'])
+        except lib.exceptions.BadRequestException:
             # No affiliation
             try:
                 lib.validation.check_keys(['altname'], event, False)
@@ -59,10 +59,10 @@ def handler(event, context):
                              KeyConditionExpression=Key('altname').eq(event['altname'])
                          )
                 if result['Count'] is 0:
-                    raise lib.NotFoundException("altname '%s' not found." % event['altname'])
-            except lib.BadRequestException:
+                    raise lib.exceptions.NotFoundException("altname '%s' not found." % event['altname'])
+            except lib.exceptions.BadRequestException:
                 # No Altname
-                raise lib.BadRequestException("Keys '%s'|'%s' missing." % ('altname', 'affiliation'))
+                raise lib.exceptions.BadRequestException("Keys '%s'|'%s' missing." % ('altname', 'affiliation'))
     except lib.exceptions.ClientError as ce:
         raise lib.exceptions.InternalServerException(ce.message)
 

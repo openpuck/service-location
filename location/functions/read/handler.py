@@ -22,9 +22,9 @@ def handler(event, context):
 
     # Test for required attributes
     if 'pathId' not in event:
-        raise lib.BadRequestException("Key 'id' is missing.")
+        raise lib.exceptions.BadRequestException("Key 'id' is missing.")
     if event['pathId'] == "":
-        raise lib.BadRequestException("Key 'id' is missing.")
+        raise lib.exceptions.BadRequestException("Key 'id' is missing.")
 
     # Get response
     try:
@@ -33,7 +33,7 @@ def handler(event, context):
         raise lib.exceptions.InternalServerException(ce.message)
 
     if 'Item' not in response:
-        raise lib.NotFoundException("Object '%s' not found." % event['pathId'])
+        raise lib.exceptions.NotFoundException("Object '%s' not found." % event['pathId'])
 
     # Return
     return lib.get_json(response['Item'])
