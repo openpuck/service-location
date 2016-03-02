@@ -21,4 +21,7 @@ def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
 
     # Return
-    return lib.get_json(lib.LocationsTable.scan()['Items'])
+    try:
+        return lib.get_json(lib.LocationsTable.scan()['Items'])
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)

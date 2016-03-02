@@ -27,7 +27,11 @@ def handler(event, context):
         raise lib.BadRequestException("Key 'id' is missing.")
 
     # Get response
-    response = lib.LocationsTable.get_item(Key={'id': event['pathId']})
+    try:
+        response = lib.LocationsTable.get_item(Key={'id': event['pathId']})
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
+
     if 'Item' not in response:
         raise lib.NotFoundException("Object '%s' not found." % event['pathId'])
 

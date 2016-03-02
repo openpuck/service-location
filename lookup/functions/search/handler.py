@@ -27,40 +27,44 @@ def handler(event, context):
     result = {}
 
     try:
-        lib.validation.check_keys(['affiliation'], event, False)
-        # Affiliation
+        # Handle any DynamoDB errors that may appear
         try:
-            lib.validation.check_keys(['altname'], event, False)
-            # Altname
-            result = lib.LocationAltnamesTable.query(
-                         IndexName='AltnameAffiliationIndex',
-                         KeyConditionExpression=Key('altname').eq(event['altname'])
-                            & Key('affiliation').eq(event['affiliation'])
-                     )
-            if result['Count'] is 0:
-                raise lib.NotFoundException("altname+affilation '%s'+'%s' not found." % (event['altname'], event['affiliation']))
+            lib.validation.check_keys(['affiliation'], event, False)
+            # Affiliation
+            try:
+                lib.validation.check_keys(['altname'], event, False)
+                # Altname
+                result = lib.LocationAltnamesTable.query(
+                             IndexName='AltnameAffiliationIndex',
+                             KeyConditionExpression=Key('altname').eq(event['altname'])
+                                & Key('affiliation').eq(event['affiliation'])
+                         )
+                if result['Count'] is 0:
+                    raise lib.NotFoundException("altname+affilation '%s'+'%s' not found." % (event['altname'], event['affiliation']))
+            except lib.BadRequestException:
+                # No Altname
+                result = lib.LocationAltnamesTable.query(
+                             IndexName='AffiliationIndex',
+                             KeyConditionExpression=Key('affiliation').eq(event['affiliation'])
+                         )
+                if result['Count'] is 0:
+                    raise lib.NotFoundException("affilation '%s' not found." % event['affiliation'])
         except lib.BadRequestException:
-            # No Altname
-            result = lib.LocationAltnamesTable.query(
-                         IndexName='AffiliationIndex',
-                         KeyConditionExpression=Key('affiliation').eq(event['affiliation'])
-                     )
-            if result['Count'] is 0:
-                raise lib.NotFoundException("affilation '%s' not found." % event['affiliation'])
-    except lib.BadRequestException:
-        # No affiliation
-        try:
-            lib.validation.check_keys(['altname'], event, False)
-            # Altname
-            result = lib.LocationAltnamesTable.query(
-                         IndexName='AltnameIndex',
-                         KeyConditionExpression=Key('altname').eq(event['altname'])
-                     )
-            if result['Count'] is 0:
-                raise lib.NotFoundException("altname '%s' not found." % event['altname'])
-        except lib.BadRequestException:
-            # No Altname
-            raise lib.BadRequestException("Keys '%s'|'%s' missing." % ('altname', 'affiliation'))
+            # No affiliation
+            try:
+                lib.validation.check_keys(['altname'], event, False)
+                # Altname
+                result = lib.LocationAltnamesTable.query(
+                             IndexName='AltnameIndex',
+                             KeyConditionExpression=Key('altname').eq(event['altname'])
+                         )
+                if result['Count'] is 0:
+                    raise lib.NotFoundException("altname '%s' not found." % event['altname'])
+            except lib.BadRequestException:
+                # No Altname
+                raise lib.BadRequestException("Keys '%s'|'%s' missing." % ('altname', 'affiliation'))
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
 
 
     return lib.get_json(result['Items'])

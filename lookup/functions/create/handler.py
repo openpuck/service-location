@@ -26,7 +26,10 @@ def handler(event, context):
 
     # Make sure the relation ids exists
     location_id = event['body']['location_id']
-    response = lib.LocationsTable.get_item(Key={'id': location_id})
+    try:
+        response = lib.LocationsTable.get_item(Key={'id': location_id})
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
     if 'Item' not in response.keys():
         raise lib.NotFoundException("Location '%s' not found." % location_id)
     # @TODO: Teams when they exist
@@ -36,7 +39,10 @@ def handler(event, context):
         event['body'][key] = event['body'][key].upper()
 
     # Add to database
-    lib.LocationAltnamesTable.put_item(Item=event['body'])
+    try:
+        lib.LocationAltnamesTable.put_item(Item=event['body'])
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
 
     # Return
     return event['body']

@@ -21,4 +21,7 @@ def handler(event, context):
     log.debug("Received event {}".format(json.dumps(event)))
 
     # Return
-    lib.LocationsTable.delete_item(Key={'id': event['pathId']})
+    try:
+        lib.LocationsTable.delete_item(Key={'id': event['pathId']})
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)

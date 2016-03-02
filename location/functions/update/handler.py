@@ -34,21 +34,24 @@ def handler(event, context):
         event['body'][key] = event['body'][key].upper()
 
     # Update
-    response = lib.LocationsTable.update_item(
-        Key={
-            'id': event['pathId']
-        },
-        UpdateExpression="set cn = :cn, street = :st, city = :ct, province = :pv, country = :co, postal = :z",
-        ExpressionAttributeValues={
-            ':cn': event['body']['cn'],
-            ':st': event['body']['street'],
-            ':ct': event['body']['city'],
-            ':pv': event['body']['province'],
-            ':co': event['body']['country'],
-            ':z' : event['body']['postal']
-        },
-        ReturnValues="ALL_NEW"
-    )
+    try:
+        response = lib.LocationsTable.update_item(
+            Key={
+                'id': event['pathId']
+            },
+            UpdateExpression="set cn = :cn, street = :st, city = :ct, province = :pv, country = :co, postal = :z",
+            ExpressionAttributeValues={
+                ':cn': event['body']['cn'],
+                ':st': event['body']['street'],
+                ':ct': event['body']['city'],
+                ':pv': event['body']['province'],
+                ':co': event['body']['country'],
+                ':z' : event['body']['postal']
+            },
+            ReturnValues="ALL_NEW"
+        )
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
 
     # Return
     return lib.get_json(response['Attributes'])

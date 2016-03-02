@@ -24,4 +24,7 @@ def handler(event, context):
     required_keys = ['altname', 'location_id']
     lib.validation.check_keys(required_keys, event, False)
 
-    return lib.LocationAltnamesTable.delete_item(Key={'location_id': event['location_id'], 'altname': event['altname']})
+    try:
+        return lib.LocationAltnamesTable.delete_item(Key={'location_id': event['location_id'], 'altname': event['altname']})
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)

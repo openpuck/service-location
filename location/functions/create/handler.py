@@ -37,7 +37,10 @@ def handler(event, context):
         event['body'][key] = event['body'][key].upper()
 
     # Add to database
-    lib.LocationsTable.put_item(Item=event['body'])
+    try:
+        lib.LocationsTable.put_item(Item=event['body'])
+    except lib.exceptions.ClientError as ce:
+        raise lib.exceptions.InternalServerException(ce.message)
 
     # Return
     return event['body']
