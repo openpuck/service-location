@@ -34,6 +34,14 @@
             "method.response.header.errorMessage": "integration.response.body.errorMessage"
           }
         },
+        "500": {
+            "selectionPattern": "InternalServerException.*",
+            "statusCode": "500",
+            "responseTemplates": "$${apiGatewayResponseErrorTemplate}",
+            "responseParameters": {
+              "method.response.header.errorMessage": "integration.response.body.errorMessage"
+            }
+        },
         "default": {
           "statusCode": "200",
           "responseParameters": {},

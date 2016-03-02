@@ -1,3 +1,5 @@
+from botocore.exceptions import ClientError
+
 class OpenpuckException(Exception):
     """
     Template class for all exceptions.
@@ -18,3 +20,10 @@ class NotFoundException(OpenpuckException):
     """
     def __init__(self, message):
         super(NotFoundException, self).__init__(message)
+
+class InternalServerException(OpenpuckException):
+    """
+    500 Internal Server Error
+    """
+    def __init__(self, message):
+        super(InternalServerException, self).__init__(message)
