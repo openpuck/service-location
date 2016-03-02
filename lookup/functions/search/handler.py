@@ -23,15 +23,14 @@ def handler(event, context):
 
     # Test for required attributes
     #required_keys = ['altname']
-    #lib.test_for_keys(required_keys, event, False)
 
     result = {}
 
     try:
-        lib.test_for_keys(['affiliation'], event, False)
+        lib.validation.check_keys(['affiliation'], event, False)
         # Affiliation
         try:
-            lib.test_for_keys(['altname'], event, False)
+            lib.validation.check_keys(['altname'], event, False)
             # Altname
             result = lib.LocationAltnamesTable.query(
                          IndexName='AltnameIndex',
@@ -47,7 +46,7 @@ def handler(event, context):
     except lib.BadRequestException:
         # No affiliation
         try:
-            lib.test_for_keys(['altname'], event, False)
+            lib.validation.check_keys(['altname'], event, False)
             # Altname
             result = lib.LocationAltnamesTable.query(
                          IndexName='AltnameIndex',

@@ -22,6 +22,6 @@ def handler(event, context):
 
     # Test for required attributes
     required_keys = ['altname', 'location_id']
-    lib.test_for_keys(required_keys, event, False)
+    lib.validation.check_keys(required_keys, event, False)
 
     return lib.LocationAltnamesTable.delete_item(Key={'location_id': event['location_id'], 'altname': event['altname']})

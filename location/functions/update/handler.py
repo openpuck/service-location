@@ -22,17 +22,12 @@ def handler(event, context):
 
     # Test for required attributes
     required_keys = ['cn', 'street', 'city', 'province', 'icao']
-    for key in required_keys:
-        if key not in event['body'].keys():
-            raise lib.BadRequestException("Key '%s' is missing." % key)
-        if len(event['body'][key]) is 0:
-            raise lib.BadRequestException("Key '%s' is empty." % key)
-    if 'pathId' not in event.keys():
-        raise lib.BadRequestException("Key '%s' is missing." % key)
+    lib.validation.check_keys(required_keys, event)
+    lib.validation.check_keys(['pathId'], event, False)
 
     # Validate
-    lib.validate_string_length(event['body']['province'], 2)
-    lib.validate_string_length(event['body']['icao'], 4)
+    lib.validation.string_length(event['body']['province'], 2)
+    lib.validation.string_length(event['body']['icao'], 4)
 
     # Normalize certain fields
     for key in ['street', 'city', 'province', 'icao']:

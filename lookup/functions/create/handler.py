@@ -22,7 +22,7 @@ def handler(event, context):
 
     # Test for required attributes
     required_keys = ['altname']
-    lib.test_for_keys(required_keys, event)
+    lib.validation.check_keys(required_keys, event)
 
     # Make sure the relation ids exists
     location_id = event['body']['location_id']
