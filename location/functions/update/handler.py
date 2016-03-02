@@ -39,14 +39,13 @@ def handler(event, context):
             Key={
                 'id': event['pathId']
             },
-            UpdateExpression="set cn = :cn, street = :st, city = :ct, province = :pv, country = :co, postal = :z",
+            UpdateExpression="set cn = :cn, street = :st, city = :ct, province = :pv, country = :co",
             ExpressionAttributeValues={
                 ':cn': event['body']['cn'],
                 ':st': event['body']['street'],
                 ':ct': event['body']['city'],
                 ':pv': event['body']['province'],
-                ':co': event['body']['country'],
-                ':z' : event['body']['postal']
+                ':co': event['body']['country']
             },
             ReturnValues="ALL_NEW"
         )
