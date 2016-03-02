@@ -18,6 +18,7 @@
       "apiKeyRequired": false,
       "requestParameters": {
         "integration.request.querystring.location_id": "method.request.querystring.location_id",
+        "integration.request.querystring.affiliation": "method.request.querystring.affiliation",
         "integration.request.querystring.altname": "method.request.querystring.altname"
       },
       "requestTemplates": "$${apigLookupRequestTemplate}",
