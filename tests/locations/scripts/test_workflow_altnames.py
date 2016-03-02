@@ -44,6 +44,7 @@ def create(loc_json):
     """
     Create an altname.
     """
+    print "CREATE"
     altname = {
         "location_id": loc_json['id'],
         "altname": "FOOBARLOLZ"
@@ -56,6 +57,7 @@ def delete(alt_json):
     """
     Delete an altname.
     """
+    print "DELETE"
     urlparts = {'location_id': alt_json['location_id'], 'altname': alt_json['altname']}
     r_loc_delete = requests.delete(ALTNAME_URL, params=urlparts)
     myerror(r_loc_delete)
