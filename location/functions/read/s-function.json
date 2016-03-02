@@ -18,29 +18,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
-      "responses": {
-        "400": {
-          "statusCode": "400",
-          "selectionPattern": "BadRequestException.*",
-          "responseTemplates": "$${apiGatewayResponseErrorTemplate}"
-        },
-        "404": {
-          "selectionPattern": "NotFoundException.*",
-          "statusCode": "404",
-          "responseTemplates": "$${apiGatewayResponseErrorTemplate}",
-          "responseParameters": {
-            "method.response.header.errorMessage": "integration.response.body.errorMessage"
-          }
-        },
-        "default": {
-          "statusCode": "200",
-          "responseParameters": {},
-          "responseModels": {},
-          "responseTemplates": {
-            "application/json": ""
-          }
-        }
-      }
+      "responses": "$${apigResponsesTemplate}"
     }
   ],
   "events": []

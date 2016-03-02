@@ -19,5 +19,28 @@
       "location_id": "$input.params().querystring.get('location_id')",
       "affiliation": "$input.params().querystring.get('affiliation')"
     }
-  }
+  },
+    "apigResponsesTemplate": {
+        "400": {
+          "statusCode": "400",
+          "selectionPattern": "BadRequestException.*",
+          "responseTemplates": "$${apiGatewayResponseErrorTemplate}"
+        },
+        "404": {
+          "selectionPattern": "NotFoundException.*",
+          "statusCode": "404",
+          "responseTemplates": "$${apiGatewayResponseErrorTemplate}",
+          "responseParameters": {
+            "method.response.header.errorMessage": "integration.response.body.errorMessage"
+          }
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {},
+          "responseTemplates": {
+            "application/json": ""
+          }
+       }
+    }
 }

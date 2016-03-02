@@ -18,19 +18,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
-      "responses": {
-        "400": {
-          "statusCode": "400"
-        },
-        "default": {
-          "statusCode": "200",
-          "responseParameters": {},
-          "responseModels": {},
-          "responseTemplates": {
-            "application/json": ""
-          }
-        }
-      }
+      "responses": "$${apigResponsesTemplate}"
     }
   ],
   "events": []
