@@ -24,7 +24,12 @@ def handler(event, context):
     required_keys = ['altname']
     lib.test_for_keys(required_keys, event)
 
-    # No special validation needed
+    # Make sure the relation ids exists
+    location_id = event['body']['location_id']
+    response = lib.LocationsTable.get_item(Key={'id': location_id})
+    if 'Item' not in response.keys():
+        raise lib.NotFoundException("Location '%s' not found." % location_id)
+    # @TODO: Teams when they exist
 
     # Normalize certain fields
     for key in ['altname']:
